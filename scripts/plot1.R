@@ -24,7 +24,7 @@ twoDayRandomConsumptionSpan <- c(randomDate, randomDate + 1)
 february2DayConsumption <- filter(powerConsumption, Date == twoDayRandomConsumptionSpan)
 
 # Open png device
-png("global_active_power_histogram.png", height=900, width=1600)
+png("plot1.png", height=480, width=480)
 
 # Plot histogram of Global Active Power for 2-day period in February 2007
 hist(february2DayConsumption$Global_active_power, main = "Global Active Power", 

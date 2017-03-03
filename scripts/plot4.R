@@ -1,4 +1,4 @@
-# This R Script generates a line plot of submeterings one to three in a 2-day period 
+# This R Script generates a power consumption overview with 4 plots in a 2-day period 
 # in February, 2007 according to "Individual household electric power consumption 
 # Data Set" from UC Irvine Machine Learning Repository
 
@@ -26,18 +26,32 @@ february2DayConsumption <- filter(powerConsumption, Date == twoDayRandomConsumpt
 # Get date and time of measurements
 dateAndTime <- strptime(paste(february2DayConsumption$Date, february2DayConsumption$Time
                               , sep = " "), format= "%Y-%m-%d %H:%M:%S")
+
 # Open png device
-png("two_day_period_february_submeterings.png", height=900, width=1600)
+png("plot4.png", height=480, width=480)
+
+# Enable 2 columns and two rows for displaying the plots
+par(mfrow=c(2,2))
+
+# Line plot Global Active Power for 2-day period in February 2007
+plot(dateAndTime, february2DayConsumption$Global_active_power, xlab="", 
+     ylab="Global Active Power (kilowatts)", type="l")
+
+# Line plot Voltage for 2-day period in February 2007
+plot(dateAndTime, february2DayConsumption$Voltage, xlab="datetime", 
+     ylab="Voltage", type="l")
 
 # Line plot sub meterings one to three for 2-day period in February 2007
 plot(dateAndTime, february2DayConsumption$Sub_metering_1, xlab="", 
      ylab="Energy sub metering", type="l")
 points(dateAndTime, february2DayConsumption$Sub_metering_2, col="red", type="l")
 points(dateAndTime, february2DayConsumption$Sub_metering_3, col="blue", type="l")
-
-# Set legend box
-legend("topleft",cex=1.55,lwd=1,col =c("black","red","blue"),
+legend("topright",bty="n",cex=1,lwd=1,col =c("black","red","blue"),
        legend=as.character(colnames(february2DayConsumption)[7:9]))
+
+# Line plot Global Reactive Power for 2-day period in February 2007
+plot(dateAndTime, february2DayConsumption$Global_reactive_power, xlab="datetime", 
+     ylab="Global_reactive_power", type="l")
 
 # Close png device
 dev.off()

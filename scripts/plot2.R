@@ -28,7 +28,7 @@ dateAndTime <- strptime(paste(february2DayConsumption$Date, february2DayConsumpt
       , sep = " "), format= "%Y-%m-%d %H:%M:%S")
 
 # Open png device
-png("global_active_power_line_plot.png", height=900, width=1600)
+png("plot2.png", height=480, width=480)
 
 # Line plot Global Active Power for 2-day period in February 2007
 plot(dateAndTime, february2DayConsumption$Global_active_power, xlab="", 
